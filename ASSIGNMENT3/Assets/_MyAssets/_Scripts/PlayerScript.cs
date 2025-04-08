@@ -42,28 +42,21 @@ public class PlayerScript : MonoBehaviour
 
         // TODO: Add to the trigger jump condition the new isRolling parameter from the animator.
         // Trigger jump. Use current horizontal velocity. Cannot jump in a roll.
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump") && !an.GetBool("isRolling"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
             Game.Instance.SOMA.PlaySound("Jump");
         }
+        if (isGrounded && Input.GetKeyDown(KeyCode.S))
+        {
+            an.SetBool("isRolling", true);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            an.SetBool("isRolling", false);
+        }
+       
 
-        // TODO: add the S-key functionality. Both blocks for key down and key up.
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
     }
 
         private void GroundedCheck()

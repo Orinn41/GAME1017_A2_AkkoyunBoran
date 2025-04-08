@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager
+public class SoundManager : MonoBehaviour
 {
     public enum SoundType
     {
