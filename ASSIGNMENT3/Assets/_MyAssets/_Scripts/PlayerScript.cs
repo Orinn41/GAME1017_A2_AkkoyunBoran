@@ -47,18 +47,18 @@ public class PlayerScript : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump") && !an.GetBool("isRolling"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
-            Game.Instance.SOMA.PlaySound("blipSelect");
+            Game.Instance.SOMA.PlaySound("jump");
         }
         if (isGrounded && Input.GetKeyDown(KeyCode.S))
         {
             an.SetBool("isRolling", true);
-            //Game.Instance.SOMA.PlaySound("wuwuwuS");
+            Game.Instance.SOMA.PlaySound("roll");
 
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
             an.SetBool("isRolling", false);
-           // Game.Instance.SOMA.StopSound("wuwuwuS");
+            Game.Instance.SOMA.StopSound("roll");
 
         }
        

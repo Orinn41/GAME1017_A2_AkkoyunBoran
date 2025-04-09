@@ -31,8 +31,8 @@ public class Game : MonoBehaviour
         }
         //SOMA = new SoundManager();
         SOMA.Initialize(gameObject);
-        SOMA.AddSound("blipSelect", Resources.Load<AudioClip>("blipSelect"), SoundManager.SoundType.SOUND_SFX);
-        SOMA.AddSound("wuwuwuS", Resources.Load<AudioClip>("wuwuwuS"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("jump", Resources.Load<AudioClip>("jump"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("roll", Resources.Load<AudioClip>("roll"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("StillDre", Resources.Load<AudioClip>("StillDre"), SoundManager.SoundType.SOUND_MUSIC);
         // TODO: Load the new music track.
         // TODO: Play the new music track.
