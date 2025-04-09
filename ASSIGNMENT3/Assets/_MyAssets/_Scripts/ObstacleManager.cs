@@ -45,7 +45,7 @@ public class ObstacleManager : MonoBehaviour
     }
     private void SpawnObstacle(float xPos, bool hasSprite = false )
     {
-        GameObject obsInst = Instantiate( obstaclePrefab, new Vector3(xPos, -16f, 0f ), Quaternion.identity );
+        GameObject obsInst = Instantiate( obstaclePrefab, new Vector3(xPos, -23f, 0f ), Quaternion.identity );
         obsInst.transform.parent = this.transform;
         obstacles.Add( obsInst );
         if ( hasSprite )

@@ -360,7 +360,7 @@ MonoBehaviour:
   moveSpeed: -5
   sprites:
   - {fileID: 21300000, guid: 853885630fc1b4f4ba74a20833342917, type: 3}
-  - {fileID: 21300000, guid: 9f7c40a86f6dc5f459c88bec1335ca91, type: 3}
+  - {fileID: 21300000, guid: 2dab4da1feecbf0428ad93e4a18d2fda, type: 3}
   - {fileID: 21300000, guid: 8b5ec8d25e5eba341b083afb6dcba860, type: 3}
 --- !u!4 &732068843
 Transform:
@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246e21f647c705144962a17994e7617b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SOMA: {fileID: 0}
 --- !u!4 &1031435289
 Transform:
   m_ObjectHideFlags: 0

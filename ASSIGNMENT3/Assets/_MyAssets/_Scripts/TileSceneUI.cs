@@ -15,6 +15,10 @@ public class TileSceneUI : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("TileScene");
+    }
     public void TogglePanel()
     {
         MainController.Instance.UIManager.TogglePanel();
