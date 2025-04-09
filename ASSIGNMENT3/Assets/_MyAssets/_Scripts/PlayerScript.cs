@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     private Animator an;
     private Rigidbody2D rb;
     // TODO: Add the reference for CapsuleCollider2D.
+    private CapsuleCollider2D capsule;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class PlayerScript : MonoBehaviour
         isGrounded = false; // Always start in air.
         rb = GetComponent<Rigidbody2D>();
         // TODO: Set the reference for CapsuleCollider2D.
+        capsule = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -45,15 +47,19 @@ public class PlayerScript : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump") && !an.GetBool("isRolling"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
-            Game.Instance.SOMA.PlaySound("Jump");
+            Game.Instance.SOMA.PlaySound("blipSelect");
         }
         if (isGrounded && Input.GetKeyDown(KeyCode.S))
         {
             an.SetBool("isRolling", true);
+            //Game.Instance.SOMA.PlaySound("wuwuwuS");
+
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
             an.SetBool("isRolling", false);
+           // Game.Instance.SOMA.StopSound("wuwuwuS");
+
         }
        
 

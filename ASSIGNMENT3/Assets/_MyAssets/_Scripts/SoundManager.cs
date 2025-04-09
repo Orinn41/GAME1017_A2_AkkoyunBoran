@@ -50,6 +50,10 @@ public class SoundManager : MonoBehaviour
     {
         Play(soundKey, SoundType.SOUND_SFX);
     }
+    public void StopSound(string soundKey)
+    {
+        Stop(soundKey, SoundType.SOUND_SFX);
+    }
 
     public void PlayLoopedSound(string soundKey)
     {
@@ -94,7 +98,21 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Sound key " + soundKey + " not found in the " + soundType + " dictionary.");
         }
     }
-
+    private void Stop(string soundKey, SoundType soundType)
+    {
+        Dictionary<string, AudioClip> targetDictionary;
+        AudioSource targetSource;
+        SetTargetsByType(soundType, out targetDictionary, out targetSource);
+        if(targetDictionary.ContainsKey(soundKey))
+        {
+            if(targetSource.isPlaying && targetSource.clip == targetDictionary[soundKey])
+            {
+                targetSource.Stop();
+                targetSource.clip = null;
+                targetSource.loop = false;
+            }
+        }
+    }
     public void SetVolume(float volume, SoundType soundType)
     {
         switch (soundType)
