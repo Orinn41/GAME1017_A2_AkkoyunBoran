@@ -24,12 +24,18 @@ public class Game : MonoBehaviour
 
     private void Initialize()
     {
+        SOMA = GetComponent<SoundManager>();
+        if(SOMA == null)
+        {
+            SOMA = gameObject.AddComponent<SoundManager>();
+        }
         SOMA = new SoundManager();
         SOMA.Initialize(gameObject);
         SOMA.AddSound("Jump", Resources.Load<AudioClip>("jump"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Roll", Resources.Load<AudioClip>("roll"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("StillDre", Resources.Load<AudioClip>("StillDre"), SoundManager.SoundType.SOUND_MUSIC);
         // TODO: Load the new music track.
-        // TODO: Play the new music track. 
+        // TODO: Play the new music track.
+        SOMA.PlayMusic("cyberpunk-street");
     }
 }

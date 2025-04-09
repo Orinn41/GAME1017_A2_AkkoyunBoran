@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
-    public static MainController instance {  get; private set; }
+    public static MainController Instance {  get; private set; }
     public SoundManager SoundManager { get; private set; }
-    public
+    public UIManager UIManager { get; private set; }
+    private void Awake()
+    {
+        if(Instance != null && Instance != this )
+        {
+            Destroy(gameObject);
+            return;
+
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        SoundManager = GetComponentInChildren<SoundManager>();
+        UIManager = GetComponentInChildren<UIManager>();
+        SoundManager.Initialize(gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {
