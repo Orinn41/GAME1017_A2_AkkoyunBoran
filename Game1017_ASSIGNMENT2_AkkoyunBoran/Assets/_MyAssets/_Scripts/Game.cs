@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Will persist between scenes.
+            SceneManager.sceneLoaded += OnSceneLoaded;
             Initialize();
         }
         else
@@ -41,6 +42,20 @@ public class Game : MonoBehaviour
             float elapsedTime = Time.time - startTime;
             timerText.text = "Time: " + elapsedTime.ToString("F2") + "s";
             yield return null;
+        }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "SampleScene")
+        {
+            timerText = GameObject.FindWithTag("TimerText")?.GetComponent<TMP_Text>();
+
+            if (timerText != null)
+            {
+                startTime = Time.time;
+                StopCoroutine("UpdateTimer");
+                StartCoroutine("UpdateTimer");
+            }
         }
     }
     public void SetFinalTime()
