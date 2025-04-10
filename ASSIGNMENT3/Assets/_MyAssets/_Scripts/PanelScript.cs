@@ -62,6 +62,6 @@ public class PanelScript : MonoBehaviour
     void RestartGame()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TileScene");
     }
 }
