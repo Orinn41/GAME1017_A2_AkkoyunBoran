@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     public static Game Instance { get; private set; } // Static object of the class.
+    public float FinalTime {  get; private set; }
     [SerializeField] TMP_Text timerText;
     private float startTime;
 
@@ -41,5 +42,9 @@ public class Game : MonoBehaviour
             timerText.text = "Time: " + elapsedTime.ToString("F2") + "s";
             yield return null;
         }
+    }
+    public void SetFinalTime()
+    {
+        FinalTime = Time.time - startTime;
     }
 }

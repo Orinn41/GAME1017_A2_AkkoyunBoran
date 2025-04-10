@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI; // For UI components
-using TMPro; // For TextMeshPro support
+using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq; // For TextMeshPro support
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class PlayerHealth : MonoBehaviour
     {
         
         Debug.Log("Player has died!");
+        Game.Instance.SetFinalTime();
+        SceneManager.LoadScene("GameOverScene");
     }
 
     private IEnumerator InvulnerabilityCoroutine()
