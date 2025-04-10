@@ -111,13 +111,11 @@ public class PlayerScript : MonoBehaviour
     }
     private void Die()
     {
-        // Logic for player death, restart, etc.
         Debug.Log("Player is dead!");
-        // You can load a game over scene or restart the game.
     }
     private void UpdateHealthUI()
     {
-        // Update the health UI Text component
+        
         if (healthText != null)
         {
             healthText.text = "Health: " + currentHealth;

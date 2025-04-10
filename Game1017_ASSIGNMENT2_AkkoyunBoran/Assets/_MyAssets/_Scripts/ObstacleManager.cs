@@ -59,19 +59,19 @@ public class ObstacleManager : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision  )
     {
-        if (collision.collider.CompareTag("PLAYER")) // Assumes the player has the "Player" tag
+        if (collision.collider.CompareTag("PLAYER")) 
         {
             //collision.otherCollider.enabled = false;
             Debug.LogWarning("hit Player");
             PlayerScript player = collision.collider.GetComponent<PlayerScript>();
             if (player != null)
             {
-                var playerHealth = player.GetComponent<PlayerHealth>(); // Deal 1 damage to the player
+                var playerHealth = player.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(1);
                 }
-               // Destroy(collider.otherCollider.gameObject);  // Destroy the obstacle after collision
+               // Destroy(collider.otherCollider.gameObject);
             }
         }
     }
