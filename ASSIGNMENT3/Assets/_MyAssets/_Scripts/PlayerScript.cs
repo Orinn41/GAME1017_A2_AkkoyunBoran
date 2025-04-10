@@ -15,6 +15,9 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     // TODO: Add the reference for CapsuleCollider2D.
     private CapsuleCollider2D capsule;
+    private AudioSource audioSource;
+    private AudioClip jumpClip;
+    private AudioClip rollClip;
 
     void Start()
     {
@@ -23,6 +26,9 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // TODO: Set the reference for CapsuleCollider2D.
         capsule = GetComponent<CapsuleCollider2D>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        jumpClip = Resources.Load<AudioClip>("jump");
+        rollClip = Resources.Load<AudioClip>("roll");
     }
 
     void Update()
@@ -47,25 +53,30 @@ public class PlayerScript : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump") && !an.GetBool("isRolling"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.fixedDeltaTime);
-            Game.Instance.SOMA.PlaySound("jump");
+            an.SetTrigger("Jump");
+            PlayClip(jumpClip);
         }
         if (isGrounded && Input.GetKeyDown(KeyCode.S))
         {
             an.SetBool("isRolling", true);
-            Game.Instance.SOMA.PlaySound("roll");
+            PlayClip(rollClip);
 
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
             an.SetBool("isRolling", false);
-            Game.Instance.SOMA.StopSound("roll");
+            
 
         }
        
 
     }
-
-        private void GroundedCheck()
+    private void PlayClip(AudioClip clip)
+    {
+        if (clip != null)
+            audioSource.PlayOneShot(clip);
+    }
+    private void GroundedCheck()
     {
         isGrounded = Physics2D.OverlapBox(groundDetect.position, 
             new Vector2(groundCheckWidth, groundCheckHeight), 0f, groundLayer);

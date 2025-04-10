@@ -1,46 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class UIManager : MonoBehaviour
+using UnityEngine.SceneManagement;
+public class UiManager : MonoBehaviour
 {
-    [SerializeField] private GameObject Panel;
-    private bool isPaused = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public void LoadTitlScene()
     {
-        isPaused = false;
-        Time.timeScale = 1f;
-
-        if (Panel != null)
-        {
-            Panel.SetActive(false);
-        }
+        MainController.instance.LoadScene("TitleScene");
+    }
+    public void LoadGameScene()
+    {
+        MainController.instance.LoadScene("SampleScene");
 
     }
-    public void TogglePanel()
+    public void LoadGameOverScene()
     {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
-        if (Panel != null)
-        {
-            Panel.SetActive(isPaused);
-        }
-    }
-    public void UnPause()
-    {
-        isPaused = false;
-        Time.timeScale = 1f;
-        if (Panel != null)
-        {
-            Panel.SetActive(false);
-        }
-    }
+        MainController.instance.LoadScene("GameOverScene");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

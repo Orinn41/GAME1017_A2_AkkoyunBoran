@@ -1,35 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
-    public static MainController Instance {  get; private set; }
-    public SoundManager SoundManager { get; private set; }
-    public UIManager UIManager { get; private set; }
-    private void Awake()
+    public static MainController instance;
+    public SoundManager soundManager;
+    public UiManager uiManager;
+
+    public void Awake()
     {
-        if(Instance != null && Instance != this )
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
-            return;
-
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        SoundManager = GetComponentInChildren<SoundManager>();
-        UIManager = GetComponentInChildren<UIManager>();
-        SoundManager.Initialize(gameObject);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Start()
     {
-        
+        if (soundManager == null)
+        {
+            soundManager = GetComponentInChildren<SoundManager>();
+        }
+        if (uiManager == null)
+        {
+            uiManager = GetComponentInChildren<UiManager>();
+        }
     }
+    public void LoadScene(string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+
 }
