@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class PlayerScript : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip jumpClip;
     private AudioClip rollClip;
+    private Vector2 NormalColliderSize;
+    private Vector2 NormalColliderOffset;
+    private float rollColliderHeight = 0.5f;
+    public int maxHealth = 3;
+    private int currentHealth;
+    public Text healthText;
 
     void Start()
     {
@@ -29,6 +36,10 @@ public class PlayerScript : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         jumpClip = Resources.Load<AudioClip>("jump");
         rollClip = Resources.Load<AudioClip>("roll");
+        NormalColliderSize = capsule.size;
+        NormalColliderOffset = capsule.offset;
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     void Update()
@@ -58,12 +69,16 @@ public class PlayerScript : MonoBehaviour
         }
         if (isGrounded && Input.GetKeyDown(KeyCode.S))
         {
+            capsule.size = new Vector2(capsule.size.x, rollColliderHeight);
+            capsule.offset = new Vector2(capsule.offset.x, -0.2f);
             an.SetBool("isRolling", true);
             PlayClip(rollClip);
 
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
+            capsule.size = NormalColliderSize;
+            capsule.offset = NormalColliderOffset;
             an.SetBool("isRolling", false);
             
 
@@ -81,5 +96,31 @@ public class PlayerScript : MonoBehaviour
         isGrounded = Physics2D.OverlapBox(groundDetect.position, 
             new Vector2(groundCheckWidth, groundCheckHeight), 0f, groundLayer);
         an.SetBool("isJumping", !isGrounded);
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            UpdateHealthUI();
+        }
+    }
+    private void Die()
+    {
+        // Logic for player death, restart, etc.
+        Debug.Log("Player is dead!");
+        // You can load a game over scene or restart the game.
+    }
+    private void UpdateHealthUI()
+    {
+        // Update the health UI Text component
+        if (healthText != null)
+        {
+            healthText.text = "Health: " + currentHealth;
+        }
     }
 }

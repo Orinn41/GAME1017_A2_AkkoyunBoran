@@ -45,13 +45,34 @@ public class ObstacleManager : MonoBehaviour
     }
     private void SpawnObstacle(float xPos, bool hasSprite = false )
     {
+
         GameObject obsInst = Instantiate( obstaclePrefab, new Vector3(xPos, -23f, 0f ), Quaternion.identity );
         obsInst.transform.parent = this.transform;
         obstacles.Add( obsInst );
         if ( hasSprite )
         {
+            
             obsInst.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length) ];
-            obsInst.AddComponent<BoxCollider2D>(); // unity will "wrap" the sprite geometry in the box no mater where the pivot 
+            var box = obsInst.AddComponent<BoxCollider2D>(); // unity will "wrap" the sprite geometry in the box no mater where the pivot 
+            //box.isTrigger = true;
         }
-    } 
+    }
+    private void OnCollisionEnter2D(Collision2D collision  )
+    {
+        if (collision.collider.CompareTag("PLAYER")) // Assumes the player has the "Player" tag
+        {
+            //collision.otherCollider.enabled = false;
+            Debug.LogWarning("hit Player");
+            PlayerScript player = collision.collider.GetComponent<PlayerScript>();
+            if (player != null)
+            {
+                var playerHealth = player.GetComponent<PlayerHealth>(); // Deal 1 damage to the player
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(1);
+                }
+               // Destroy(collider.otherCollider.gameObject);  // Destroy the obstacle after collision
+            }
+        }
+    }
 }
