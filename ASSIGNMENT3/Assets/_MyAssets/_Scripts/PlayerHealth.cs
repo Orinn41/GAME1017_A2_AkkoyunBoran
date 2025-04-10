@@ -12,7 +12,6 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
 
     public List<GameObject> HealthSprites= new List<GameObject>();
-    // or
     public TMP_Text healthText;
 
     private bool isInvulnerable = false; 
