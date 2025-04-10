@@ -10,21 +10,32 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Panel != null)
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        if (Panel != null)
         {
             Panel.SetActive(false);
         }
+
     }
     public void TogglePanel()
     {
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 10f;
-        Panel.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
+        if (Panel != null)
+        {
+            Panel.SetActive(isPaused);
+        }
     }
     public void UnPause()
     {
+        isPaused = false;
         Time.timeScale = 1f;
-        Panel.SetActive(false);
+        if (Panel != null)
+        {
+            Panel.SetActive(false);
+        }
     }
 
     // Update is called once per frame

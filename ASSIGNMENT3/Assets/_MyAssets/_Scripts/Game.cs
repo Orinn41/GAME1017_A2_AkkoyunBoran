@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,8 @@ public class Game : MonoBehaviour
 {
     public static Game Instance { get; private set; } // Static object of the class.
     public SoundManager SOMA;
+    [SerializeField] TMP_Text timerText;
+    private float startTime;
 
     private void Awake() // Ensure there is only one instance.
     {
@@ -36,6 +39,17 @@ public class Game : MonoBehaviour
         SOMA.AddSound("StillDre", Resources.Load<AudioClip>("StillDre"), SoundManager.SoundType.SOUND_MUSIC);
         // TODO: Load the new music track.
         // TODO: Play the new music track.
-        SOMA.PlayMusic("cyberpunk-street");
+        //SOMA.PlayMusic("cyberpunk-street");
+        startTime = Time.time;
+        StartCoroutine("UpdateTimer");
+    }
+    private IEnumerator UpdateTimer()
+    {
+        while (true)
+        {
+            float elapsedTime = Time.time - startTime;
+            timerText.text = "Time: " + elapsedTime.ToString("F2") + "s";
+            yield return null;
+        }
     }
 }
